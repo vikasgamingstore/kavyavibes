@@ -43,7 +43,6 @@ export default async function handler(req, res) {
       `telegram_${request.chat.id}_${request.from.id}_${request.date}`;
 
     const eventData = {
-  test_event_code: "TEST17206",
   data: [
         {
           event_name: "CompleteRegistration",
