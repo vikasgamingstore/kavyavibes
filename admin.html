@@ -2,404 +2,320 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090611">
-<title>KavyaVibes | Admin Dashboard</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="theme-color" content="#090611"><title>KavyaVibes Admin Dashboard</title><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
-:root{
-  --bg:#090611;
-  --panel:#151020;
-  --panel2:#1c1429;
-  --border:rgba(205,125,255,.17);
-  --pink:#ff4fa3;
-  --purple:#9b5cff;
-  --text:#fff;
-  --muted:#a99bb8;
-  --green:#42e6a4;
-  --red:#ff6b82;
-}
-
 *{box-sizing:border-box}
 
 body{
   margin:0;
+  padding:18px;
   min-height:100vh;
-  padding:24px;
-  color:var(--text);
+  color:#fff;
   font-family:'Poppins',sans-serif;
   background:
-    radial-gradient(ellipse at 10% 0%,rgba(155,92,255,.17),transparent 35%),
-    radial-gradient(ellipse at 95% 20%,rgba(255,79,163,.12),transparent 30%),
-    var(--bg);
+    radial-gradient(circle at top left,#29133e,transparent 40%),
+    radial-gradient(circle at bottom right,#32152e,transparent 35%),
+    #090611;
 }
-
-button,input,textarea{font-family:inherit}
 
 .container{
-  max-width:1100px;
-  margin:0 auto;
-}
-
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin:5px 0 35px;
+  max-width:1050px;
+  margin:auto;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+  text-align:center;
+  margin:25px 0 35px;
 }
 
 .brand-icon{
-  width:48px;
-  height:48px;
-  border-radius:15px;
+  width:65px;
+  height:65px;
+  margin:auto auto 12px;
   display:grid;
   place-items:center;
-  font-size:23px;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  box-shadow:0 5px 25px rgba(255,79,163,.25);
+  border-radius:20px;
+  font-size:30px;
+  background:linear-gradient(135deg,#ff4fa3,#914cff);
 }
 
 .brand h1{
   margin:0;
-  font-size:23px;
+  font-size:28px;
   font-weight:800;
-  letter-spacing:.3px;
 }
 
 .brand p{
-  margin:2px 0 0;
-  color:var(--muted);
+  color:#aa9bb9;
   font-size:11px;
+  letter-spacing:2px;
+  margin-top:5px;
 }
 
-.admin-badge{
-  padding:8px 14px;
-  border:1px solid var(--border);
-  border-radius:30px;
-  color:#e7b9ff;
-  font-size:11px;
-  font-weight:600;
-  background:rgba(155,92,255,.09);
-}
+/* LOGIN */
 
 .login-box{
-  max-width:430px;
-  margin:75px auto;
-  padding:35px;
-  border:1px solid var(--border);
-  border-radius:24px;
-  background:linear-gradient(145deg,rgba(35,23,49,.96),rgba(17,13,27,.96));
-  box-shadow:0 20px 70px rgba(0,0,0,.4);
-  animation:fadeUp .7s ease;
-}
-
-.login-icon{
-  width:68px;
-  height:68px;
-  margin:0 auto 18px;
-  display:grid;
-  place-items:center;
-  border-radius:22px;
-  font-size:30px;
-  background:linear-gradient(135deg,var(--pink),var(--purple));
-  box-shadow:0 8px 30px rgba(155,92,255,.3);
+  display:block;
+  width:100%;
+  max-width:420px;
+  margin:55px auto;
+  padding:28px 23px;
+  background:#191225;
+  border:1px solid #513363;
+  border-radius:20px;
+  box-shadow:0 15px 50px rgba(0,0,0,.4);
 }
 
 .login-box h2{
   text-align:center;
   margin:0;
-  font-size:25px;
+  font-size:23px;
 }
 
 .login-subtitle{
   text-align:center;
-  color:var(--muted);
+  color:#a99bb8;
   font-size:12px;
-  margin:8px 0 25px;
+  margin:8px 0 28px;
 }
 
-.field-label{
+label{
   display:block;
-  margin:19px 0 8px;
+  color:#eadcf5;
   font-size:12px;
   font-weight:600;
-  color:#e4d5f1;
+  margin:18px 0 8px;
+}
+
+.password-wrap{
+  position:relative;
+  width:100%;
 }
 
 input,textarea{
   width:100%;
-  padding:14px 15px;
-  color:white;
+  padding:14px;
+  border:1px solid #514064;
+  border-radius:11px;
   background:#0d0916;
-  border:1px solid rgba(190,140,255,.2);
-  border-radius:12px;
+  color:white;
+  font-size:14px;
+  font-family:inherit;
   outline:none;
-  font-size:13px;
-  transition:.25s;
 }
 
 input:focus,textarea:focus{
-  border-color:var(--pink);
-  box-shadow:0 0 0 3px rgba(255,79,163,.09);
+  border-color:#ff4fa3;
+  box-shadow:0 0 0 3px rgba(255,79,163,.12);
 }
 
-textarea{
-  min-height:120px;
-  resize:vertical;
-  line-height:1.7;
+.password-wrap input{
+  height:55px;
+  padding-right:60px;
 }
 
-input[type="file"]{
-  padding:12px;
-  cursor:pointer;
-}
-
-input[type="file"]::file-selector-button{
-  padding:9px 12px;
-  margin-right:12px;
+#togglePassword{
+  position:absolute;
+  right:5px;
+  top:5px;
+  width:45px;
+  height:45px;
+  padding:0;
+  margin:0;
   border:0;
-  border-radius:8px;
+  border-radius:9px;
+  background:transparent;
   color:white;
-  background:linear-gradient(90deg,var(--purple),var(--pink));
+  font-size:21px;
   cursor:pointer;
+  box-shadow:none;
 }
 
-button{
+#loginButton{
+  display:block;
+  width:100%;
+  height:55px;
+  margin-top:22px;
   border:0;
-  cursor:pointer;
+  border-radius:12px;
+  background:linear-gradient(100deg,#ff4fa3,#914cff);
   color:white;
-  font-weight:700;
-  transition:transform .2s,box-shadow .2s,opacity .2s;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  visibility:visible;
+  opacity:1;
+  box-shadow:0 7px 25px rgba(255,79,163,.25);
 }
-
-button:hover:not(:disabled){
-  transform:translateY(-2px);
-  box-shadow:0 8px 25px rgba(255,79,163,.2);
-}
-
-button:active:not(:disabled){transform:scale(.98)}
 
 button:disabled{
-  opacity:.55;
+  opacity:.6;
   cursor:not-allowed;
 }
 
-.primary-btn{
-  width:100%;
-  padding:14px;
-  margin-top:20px;
-  border-radius:12px;
-  background:linear-gradient(100deg,var(--pink),var(--purple));
-  font-size:14px;
-  box-shadow:0 6px 22px rgba(155,92,255,.2);
+.message{
+  min-height:20px;
+  margin-top:13px;
+  text-align:center;
+  color:#ff758a;
+  font-size:12px;
 }
 
-.dashboard{display:none;animation:fadeUp .6s ease}
+.success{color:#42e6a4!important}
+
+/* DASHBOARD */
+
+.dashboard{display:none}
 
 .welcome{
-  padding:27px;
-  border:1px solid var(--border);
-  border-radius:22px;
-  background:linear-gradient(110deg,rgba(255,79,163,.12),rgba(155,92,255,.13));
-  position:relative;
-  overflow:hidden;
-}
-
-.welcome:after{
-  content:"✦";
-  position:absolute;
-  right:35px;
-  top:-25px;
-  font-size:130px;
-  color:rgba(255,255,255,.05);
+  padding:25px;
+  border:1px solid #543464;
+  border-radius:18px;
+  background:linear-gradient(110deg,rgba(255,79,163,.12),rgba(145,76,255,.15));
 }
 
 .welcome h2{
   margin:0;
-  font-size:24px;
-  font-weight:700;
+  font-size:22px;
 }
 
 .welcome p{
-  color:var(--muted);
+  color:#aa9bb9;
   font-size:12px;
-  margin:8px 0 0;
+  margin-bottom:0;
 }
 
 .section-heading{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
-  margin:32px 0 17px;
+  gap:10px;
+  margin:30px 0 15px;
 }
 
 .section-heading h2{
-  margin:0;
   font-size:17px;
-  font-weight:700;
+  margin:0;
 }
 
-.section-heading span{
-  color:var(--muted);
-  font-size:11px;
+button{
+  font-family:inherit;
+  transition:.2s;
 }
 
 .refresh-btn{
-  padding:10px 15px;
+  padding:11px 15px;
+  border:0;
   border-radius:10px;
+  background:linear-gradient(90deg,#914cff,#704cff);
+  color:white;
   font-size:11px;
-  background:linear-gradient(100deg,var(--purple),#704cff);
+  font-weight:700;
+  cursor:pointer;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
 }
 
-.stat-card{
-  position:relative;
-  overflow:hidden;
+.card{
   padding:20px;
-  min-height:125px;
-  border:1px solid var(--border);
-  border-radius:17px;
-  background:linear-gradient(145deg,#1d1529,#120e1b);
-  transition:.3s;
-  animation:fadeUp .5s ease both;
+  border-radius:16px;
+  border:1px solid #443052;
+  background:linear-gradient(145deg,#21172d,#140f1d);
+  transition:.25s;
 }
 
-.stat-card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(255,79,163,.5);
-  box-shadow:0 12px 30px rgba(0,0,0,.25);
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#ff4fa3;
 }
 
-.stat-card p{
+.card p{
   margin:0;
-  color:var(--muted);
+  color:#b7a8c5;
   font-size:11px;
-  font-weight:500;
 }
 
-.stat-card h3{
+.card h2{
   margin:12px 0 0;
-  font-size:29px;
-  font-weight:800;
-  letter-spacing:.5px;
-  background:linear-gradient(90deg,#fff,var(--pink));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+  font-size:28px;
+  color:#ff8ac3;
   overflow-wrap:anywhere;
-}
-
-.stat-icon{
-  position:absolute;
-  right:16px;
-  top:15px;
-  font-size:22px;
-  opacity:.8;
 }
 
 .status-line{
+  padding:12px;
   margin-top:15px;
-  padding:12px 15px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  color:var(--muted);
+  border-radius:10px;
+  background:#171020;
+  border:1px solid #352443;
+  color:#aa9bb9;
   font-size:11px;
-  background:rgba(255,255,255,.025);
 }
-
-.message{
-  min-height:20px;
-  margin-top:13px;
-  color:var(--red);
-  font-size:12px;
-  text-align:center;
-  overflow-wrap:anywhere;
-}
-
-.success{color:var(--green)!important}
 
 .settings-box{
-  padding:25px;
-  border:1px solid var(--border);
-  border-radius:20px;
-  background:linear-gradient(145deg,#191224,#110d19);
-  box-shadow:0 15px 45px rgba(0,0,0,.2);
+  padding:23px;
+  border:1px solid #493057;
+  border-radius:18px;
+  background:#191225;
 }
 
-.settings-intro{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.7;
-  margin:0 0 20px;
+.settings-box textarea{
+  min-height:115px;
+  resize:vertical;
 }
 
 .preview-area{
   display:flex;
   align-items:center;
-  gap:20px;
-  flex-wrap:wrap;
+  gap:18px;
   margin-top:15px;
+  flex-wrap:wrap;
 }
 
 .preview{
   width:115px;
   height:115px;
+  border-radius:17px;
+  border:2px solid #ff4fa3;
   object-fit:cover;
-  display:block;
-  border-radius:20px;
   background:#0d0916;
-  border:2px solid rgba(255,79,163,.5);
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
 }
 
 .preview-info{
-  color:var(--muted);
+  color:#b7a8c5;
   font-size:11px;
   line-height:1.8;
 }
 
 .small-note{
-  color:var(--muted);
+  color:#a99bb8;
   font-size:10px;
   line-height:1.7;
-  margin-top:12px;
 }
 
-.secondary-btn{
+.action-btn{
   width:100%;
-  padding:13px;
-  margin-top:17px;
+  padding:15px;
+  margin-top:15px;
+  border:0;
   border-radius:11px;
-  background:linear-gradient(100deg,#704cff,#9b5cff);
-  font-size:12px;
+  color:white;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.upload-btn{
+  background:linear-gradient(90deg,#704cff,#914cff);
 }
 
 .save-btn{
-  width:100%;
-  padding:14px;
-  margin-top:12px;
-  border-radius:11px;
-  background:linear-gradient(100deg,var(--pink),#a044ff);
-  font-size:13px;
-}
-
-.footer{
-  text-align:center;
-  color:#71647e;
-  font-size:10px;
-  margin:35px 0 10px;
+  background:linear-gradient(90deg,#ff4fa3,#914cff);
 }
 
 .spinner{
@@ -414,120 +330,110 @@ button:disabled{
   animation:spin .7s linear infinite;
 }
 
-@keyframes spin{to{transform:rotate(360deg)}}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:translateY(0)}
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
 
-@media(max-width:700px){
-  body{padding:15px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-  .stat-card{padding:15px;min-height:115px}
-  .stat-card h3{font-size:25px}
-  .welcome{padding:22px}
-  .welcome h2{font-size:20px}
-  .settings-box{padding:18px}
+.footer{
+  text-align:center;
+  color:#71647e;
+  font-size:10px;
+  margin:35px 0 15px;
+}
+
+@media(max-width:650px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card{padding:15px}
+  .card h2{font-size:23px}
 }
 
 @media(max-width:380px){
-  .brand h1{font-size:19px}
-  .admin-badge{font-size:9px;padding:7px 9px}
-  .stat-card h3{font-size:21px}
-  .stat-card p{font-size:10px}
-  .login-box{padding:23px}
+  body{padding:12px}
+  .grid{gap:9px}
+  .card{padding:12px}
+  .card h2{font-size:20px}
+  .login-box{padding:22px 17px}
 }
-</style></head><body>
-<div class="container"><header class="topbar">
-  <div class="brand">
-    <div class="brand-icon">✦</div>
-    <div>
-      <h1>KavyaVibes</h1>
-      <p>ADMIN CONTROL CENTER</p>
-    </div>
-  </div>
-  <div class="admin-badge">● ADMIN PANEL</div>
-</header><!-- LOGIN --><div class="login-box" id="loginBox">
-  <div class="login-icon">🔐</div>
-  <h2>Welcome Back</h2>
-  <p class="login-subtitle">Sign in to manage your website</p><label class="field-label" for="password">Admin Password</label>
-<input
-type="password"
-id="password"
-placeholder="Enter your admin password"
-autocomplete="current-password"
+</style></head><body><div class="container"><header class="brand">
+  <div class="brand-icon">✦</div>
+  <h1>KavyaVibes</h1>
+  <p>ADMIN CONTROL CENTER</p>
+</header><!-- LOGIN BOX --><div class="login-box" id="loginBox">  <h2>Admin Login 🔐</h2>
+  <p class="login-subtitle">Enter your password to access dashboard</p><label for="password">Admin Password</label>
 
-«»
+  <div class="password-wrap">
+    <input
+      type="password"
+      id="password"
+      placeholder="Enter your password"
+      autocomplete="current-password"
+    ><button
+  type="button"
+  id="togglePassword"
+  onclick="togglePasswordVisibility()"
+  aria-label="Show or hide password"
+>👁️</button>
 
-  <button class="primary-btn" id="loginButton" onclick="login()">
-    Login to Dashboard →
-  </button>  <div class="message" id="loginMessage"></div>
-</div><!-- DASHBOARD --><div class="dashboard" id="dashboard">  <section class="welcome">
+  </div><button
+type="button"
+id="loginButton"
+onclick="login()"
+
+«LOGIN →</button>»
+
+  <div class="message" id="loginMessage"></div></div><!-- DASHBOARD --><div class="dashboard" id="dashboard">  <div class="welcome">
     <h2>Welcome to Dashboard ✨</h2>
-    <p>Manage your website settings and monitor tracking activity.</p>
-  </section>  <div class="section-heading">
+    <p>Manage your website and monitor tracking reports.</p>
+  </div>  <div class="section-heading">
     <h2>📊 Tracking Overview</h2>
-    <button class="refresh-btn" onclick="loadStats()">↻ Refresh Reports</button>
-  </div>  <div class="grid"><div class="stat-card">
-  <span class="stat-icon">👥</span>
+    <button class="refresh-btn" onclick="loadStats()">↻ Refresh</button>
+  </div>  <div class="grid"><div class="card">
   <p>Total Visitors</p>
-  <h3 id="visitors">-</h3>
+  <h2 id="visitors">-</h2>
 </div>
 
-<div class="stat-card">
-  <span class="stat-icon">🔗</span>
+<div class="card">
   <p>Total Telegram Invites</p>
-  <h3 id="invites">-</h3>
+  <h2 id="invites">-</h2>
 </div>
 
-<div class="stat-card">
-  <span class="stat-icon">📩</span>
+<div class="card">
   <p>Join Requests</p>
-  <h3 id="requests">-</h3>
+  <h2 id="requests">-</h2>
 </div>
 
-<div class="stat-card">
-  <span class="stat-icon">✅</span>
+<div class="card">
   <p>Meta Events Sent</p>
-  <h3 id="sent">-</h3>
+  <h2 id="sent">-</h2>
 </div>
 
-<div class="stat-card">
-  <span class="stat-icon">❌</span>
+<div class="card">
   <p>Meta Events Failed</p>
-  <h3 id="failed">-</h3>
+  <h2 id="failed">-</h2>
 </div>
 
-<div class="stat-card">
-  <span class="stat-icon">⏳</span>
+<div class="card">
   <p>Meta Events Pending</p>
-  <h3 id="pending">-</h3>
+  <h2 id="pending">-</h2>
 </div>
 
   </div>  <div class="status-line" id="lastUpdated">
-    Reports have not been loaded yet.
+    Reports not loaded yet.
   </div>  <div class="message" id="dashboardMessage"></div>  <div class="section-heading">
     <h2>⚙️ Website Customization</h2>
-    <span>Manage your website appearance</span>
-  </div>  <section class="settings-box"><p class="settings-intro">
-  Update your website name, profile details and profile picture.
-  Changes will appear on your website after saving successfully.
-</p>
-
-<label class="field-label" for="websiteName">Website Name</label>
+  </div>  <div class="settings-box"><label for="websiteName">Website Name</label>
 <input id="websiteName" type="text" placeholder="Enter website name" maxlength="100">
 
-<label class="field-label" for="profileName">Profile Name</label>
+<label for="profileName">Profile Name</label>
 <input id="profileName" type="text" placeholder="Enter profile name" maxlength="100">
 
-<label class="field-label" for="tagline">Tagline</label>
-<input id="tagline" type="text" placeholder="Enter your tagline" maxlength="200">
+<label for="tagline">Tagline</label>
+<input id="tagline" type="text" placeholder="Enter tagline" maxlength="200">
 
-<label class="field-label" for="description">Profile Description</label>
-<textarea id="description" placeholder="Write your profile description..." maxlength="2000"></textarea>
+<label for="description">Profile Description</label>
+<textarea id="description" placeholder="Enter profile description" maxlength="2000"></textarea>
 
-<label class="field-label" for="photoFile">Profile Photo</label>
+<label for="photoFile">Profile Photo</label>
 <input
   id="photoFile"
   type="file"
@@ -535,33 +441,46 @@ autocomplete="current-password"
 >
 
 <div class="preview-area">
-  <img id="photoPreview" class="preview" alt="Profile photo preview">
+  <img id="photoPreview" class="preview" alt="Profile preview">
   <div class="preview-info">
-    <strong style="color:#f2d8ff">Photo Preview</strong><br>
-    JPG, PNG or WEBP<br>
-    Maximum file size: 5 MB
+    Profile Photo Preview<br>
+    JPG, PNG, WEBP<br>
+    Maximum 5 MB
   </div>
 </div>
 
 <p class="small-note">
-  Select a new photo to preview it. Click Upload Profile Photo to upload it.
-  After uploading, click Save Website Settings to save the updated settings.
+  Select a photo, preview it, then upload it. After successful upload,
+  save your website settings.
 </p>
 
-<button class="secondary-btn" id="uploadButton" onclick="uploadPhoto()">
+<button class="action-btn upload-btn" id="uploadButton" onclick="uploadPhoto()">
   ↑ Upload Profile Photo
 </button>
 
-<button class="save-btn" id="saveButton" onclick="saveSettings()">
+<button class="action-btn save-btn" id="saveButton" onclick="saveSettings()">
   ✓ Save Website Settings
 </button>
 
 <div class="message" id="settingsMessage"></div>
 
-  </section></div><footer class="footer">
-  KavyaVibes Admin Control Center · Secure Dashboard
+  </div></div><footer class="footer">
+  KavyaVibes Admin Dashboard
 </footer></div><script>
 let selectedPhoto = null;
+
+function togglePasswordVisibility(){
+  const input = document.getElementById("password");
+  const button = document.getElementById("togglePassword");
+
+  if(input.type === "password"){
+    input.type = "text";
+    button.textContent = "🙈";
+  }else{
+    input.type = "password";
+    button.textContent = "👁️";
+  }
+}
 
 async function login() {
   const password = document.getElementById("password").value;
@@ -601,7 +520,7 @@ async function login() {
     message.textContent = error.message;
   } finally {
     button.disabled = false;
-    button.textContent = "Login to Dashboard →";
+    button.textContent = "LOGIN →";
   }
 }
 
@@ -721,7 +640,6 @@ async function uploadPhoto() {
 
   button.disabled = true;
   button.innerHTML = '<span class="spinner"></span>Uploading...';
-  message.textContent = "";
 
   try {
     const base64 = await new Promise((resolve, reject) => {
