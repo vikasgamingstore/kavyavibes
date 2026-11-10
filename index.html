@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10091c">
-
-<title>KavyaVibes | Social Entertainment</title>
-<meta name="description" id="pageDescription" content="Welcome to KavyaVibes, a friendly social entertainment community.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="theme-color" content="#10091c"><title>KavyaVibes | Social Entertainment</title>
+<meta name="description" id="pageDescription" content="Welcome to KavyaVibes, a friendly social entertainment community."><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&display=swap" rel="stylesheet"><style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
   font-family:'Montserrat',sans-serif;
   background:#0c0714;
   color:#fff;
   line-height:1.7;
+  overflow-x:hidden;
 }
 
 header{
@@ -182,6 +180,8 @@ h1 span{
   font-size:13px;
 }
 
+/* COMMUNITY GUIDELINES */
+
 .trust{
   max-width:1000px;
   margin:55px auto;
@@ -190,41 +190,76 @@ h1 span{
   background:#1b1126;
   border:1px solid #57305d;
   border-radius:20px;
+  overflow:hidden;
 }
 
 .trust h2{
   font-family:'Playfair Display',serif;
-  font-size:29px;
-  margin-bottom:12px;
+  font-size:clamp(20px,6vw,29px);
+  line-height:1.35;
+  margin:0 auto 18px;
   color:#ff9bd0;
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
 }
 
 .trust p{
   color:#cdbed4;
   font-size:12px;
+  line-height:1.9;
+  max-width:650px;
+  margin:auto;
 }
+
+/* READY TO JOIN */
+
+.ready-section{
+  text-align:center;
+  padding:0 20px;
+  margin:55px auto;
+}
+
+.ready-section h2{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+}
+
+.ready-section p{
+  color:#bbaec7;
+  font-size:12px;
+  margin-top:8px;
+}
+
+/* FOOTER */
 
 footer{
   text-align:center;
-  padding:30px 15px;
+  padding:32px 18px;
   color:#a99bb3;
-  font-size:11px;
-  letter-spacing:.5px;
+  font-size:12px;
+  letter-spacing:.4px;
+  line-height:1.8;
   border-top:1px solid #30203a;
 }
 
 .footer-links{
   display:flex;
-  flex-wrap:wrap;
+  flex-direction:column;
+  align-items:center;
   justify-content:center;
-  gap:12px 20px;
-  margin:18px auto;
+  gap:10px;
+  margin:20px auto;
 }
 
 .footer-links a{
+  display:block;
   color:#ff9bd0;
   text-decoration:none;
-  font-size:11px;
+  font-size:13px;
+  padding:2px 5px;
 }
 
 .footer-links a:hover{
@@ -235,7 +270,15 @@ footer{
 .support-email{
   color:#ff9bd0;
   text-decoration:none;
+  overflow-wrap:anywhere;
 }
+
+.footer-note{
+  margin-top:14px;
+  font-size:11px;
+}
+
+/* AGE VERIFICATION */
 
 .age-overlay{
   position:fixed;
@@ -287,115 +330,128 @@ footer{
   cursor:pointer;
 }
 
-.yes{background:#e83c9b;color:white}
-.no{background:#403449;color:white}
-.hidden{display:none!important}
+.yes{
+  background:#e83c9b;
+  color:white;
+}
+
+.no{
+  background:#403449;
+  color:white;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* MOBILE RESPONSIVE */
 
 @media(max-width:480px){
-  header{padding:15px}
-  .logo{font-size:21px}
-  .badge{font-size:9px;letter-spacing:.7px}
-  .hero{padding:42px 18px}
-  .profile-photo{width:125px;height:125px}
+
+  header{
+    padding:15px;
+  }
+
+  .logo{
+    font-size:21px;
+  }
+
+  .badge{
+    font-size:9px;
+    letter-spacing:.7px;
+  }
+
+  .hero{
+    padding:42px 18px;
+    margin:20px 10px;
+  }
+
+  .profile-photo{
+    width:125px;
+    height:125px;
+  }
+
+  .trust{
+    margin:45px 10px;
+    padding:30px 15px;
+  }
+
+  .trust h2{
+    font-size:clamp(19px,5.7vw,25px);
+    gap:6px;
+  }
+
+  .trust p{
+    font-size:12px;
+  }
+
+  .ready-section{
+    margin:50px auto;
+  }
+
+  footer{
+    padding:28px 15px;
+  }
+
+  .footer-links{
+    gap:12px;
+    margin:20px auto;
+  }
+
+  .footer-links a{
+    font-size:13px;
+  }
 }
-</style>
-</head>
-
-<body>
-
-<div class="age-overlay" id="ageOverlay">
+</style></head><body><div class="age-overlay" id="ageOverlay">
   <div class="age-box">
     <h2>18+ Age Verification</h2>
-    <p>This community is intended for adults aged 18 or above. Please confirm your age to continue.</p>
-    <div class="age-actions">
-      <button class="yes" id="ageYes">I am 18+</button>
-      <button class="no" id="ageNo">Exit</button>
-    </div>
-  </div>
+    <p>This community is intended for adults aged 18 or above. Please confirm your age to continue.</p><div class="age-actions">
+  <button class="yes" id="ageYes">I am 18+</button>
+  <button class="no" id="ageNo">Exit</button>
 </div>
 
-<header>
+  </div>
+</div><header>
   <div class="logo" id="websiteName">KAVYAVIBES</div>
   <div class="badge">SOCIAL COMMUNITY</div>
-</header>
-
-<main>
-
-<section class="hero">
-
-  <div class="profile-area">
+</header><main><section class="hero">  <div class="profile-area">
     <img id="profilePhoto" class="profile-photo" alt="Profile photo">
     <div class="profile-name" id="profileName"></div>
-  </div>
-
-  <div class="tag" id="tagline">
+  </div>  <div class="tag" id="tagline">
     ✨ WELCOME TO KAVYAVIBES
-  </div>
-
-  <h1>Discover Your <span>Vibe</span></h1>
-
-  <p id="profileDescription">
+  </div>  <h1>Discover Your <span>Vibe</span></h1>  <p id="profileDescription">
     Welcome to KavyaVibes, a friendly community for social interaction,
     general chatting and non-sexual entertainment.
-  </p>
-
-  <button class="join-btn" id="joinButton">
+  </p>  <button class="join-btn" id="joinButton">
     ✈ JOIN TELEGRAM CHANNEL
-  </button>
-
-  <div id="status" aria-live="polite"></div>
-
-</section>
-
-<section class="trust">
-  <h2>🛡️ Community Guidelines</h2>
-  <p>
+  </button>  <div id="status" aria-live="polite"></div></section><section class="trust">  <h2>
+    <span>🛡️</span>
+    <span>Community Guidelines</span>
+  </h2>  <p>
     Respect privacy, personal boundaries and consent.
     Harassment, impersonation, illegal content and non-consensual
     material are not permitted. Please follow applicable laws
     and Telegram's community rules.
-  </p>
-</section>
-
-<section class="section" style="text-align:center;padding:0 20px;margin:55px auto">
-  <h2 style="font-family:'Playfair Display',serif;font-size:32px">
-    Ready to Join?
-  </h2>
-
-  <p style="color:#bbaec7;font-size:12px;margin-top:8px">
+  </p></section><section class="ready-section">  <h2>Ready to Join?</h2>  <p>
     Continue to our Telegram community.
-  </p>
-
-  <button class="join-btn" id="joinButton2">
+  </p>  <button class="join-btn" id="joinButton2">
     ✈ JOIN TELEGRAM CHANNEL
-  </button>
-</section>
-
-</main>
-
-<footer>
-  © 2026 <span id="footerName">KavyaVibes</span>. All Rights Reserved.
-
-  <div class="footer-links">
+  </button></section></main><footer>  <p>
+    © 2026 <span id="footerName">KavyaVibes</span>.
+    All Rights Reserved.
+  </p>  <nav class="footer-links" aria-label="Legal pages">
     <a href="/privacy-policy.html">Privacy Policy</a>
     <a href="/cookie-policy.html">Cookie Policy</a>
-    <a href="/terms.html">Terms & Conditions</a>
+    <a href="/terms.html">Terms &amp; Conditions</a>
     <a href="/data-deletion.html">Data Deletion</a>
-  </div>
-
-  <div>
+  </nav>  <div>
     Support:
     <a class="support-email" href="mailto:support@KavyaVibes.com">
       support@KavyaVibes.com
     </a>
-  </div>
-
-  <p style="margin-top:12px">
+  </div>  <p class="footer-note">
     Adults Only • Respect • Privacy • Consent
-  </p>
-</footer>
-
-<script>
+  </p></footer><script>
 const button = document.getElementById("joinButton");
 const button2 = document.getElementById("joinButton2");
 const statusBox = document.getElementById("status");
@@ -404,7 +460,9 @@ const ageOverlay = document.getElementById("ageOverlay");
 /* LOAD ADMIN SETTINGS */
 
 async function loadSiteSettings(){
+
   try{
+
     const response = await fetch("/api/site-settings",{
       method:"GET",
       cache:"no-store"
@@ -418,7 +476,14 @@ async function loadSiteSettings(){
 
     const settings = result.settings || {};
 
-    const websiteName = settings.website_name || "KavyaVibes";
+    /* Prevent old Kavya Paid Fun branding */
+
+    const savedName = settings.website_name || "";
+
+    const websiteName =
+      /paid\s*fun/i.test(savedName)
+      ? "KavyaVibes"
+      : (savedName || "KavyaVibes");
 
     document.getElementById("websiteName").textContent =
       websiteName;
@@ -426,24 +491,35 @@ async function loadSiteSettings(){
     document.getElementById("footerName").textContent =
       websiteName;
 
-    document.title = websiteName + " | Social Entertainment";
+    document.title =
+      websiteName + " | Social Entertainment";
 
     if(settings.profile_name){
+
       document.getElementById("profileName").textContent =
         settings.profile_name;
+
     }
 
     if(settings.tagline){
+
       document.getElementById("tagline").textContent =
         settings.tagline;
+
     }
 
     if(settings.description){
+
       document.getElementById("profileDescription").textContent =
         settings.description;
+
+      document.getElementById("pageDescription")
+        .setAttribute("content",settings.description);
+
     }
 
     if(settings.photo_url){
+
       const photo = document.getElementById("profilePhoto");
 
       photo.onload = () => {
@@ -455,16 +531,15 @@ async function loadSiteSettings(){
       };
 
       photo.src = settings.photo_url;
-    }
 
-    if(settings.description){
-      document.getElementById("pageDescription")
-        .setAttribute("content",settings.description);
     }
 
   }catch(error){
+
     console.error("Settings loading error:",error);
+
   }
+
 }
 
 loadSiteSettings();
@@ -472,25 +547,35 @@ loadSiteSettings();
 /* AGE VERIFICATION */
 
 if(sessionStorage.getItem("adultConfirmed")==="yes"){
+
   ageOverlay.classList.add("hidden");
+
 }
 
 document.getElementById("ageYes").addEventListener("click",()=>{
+
   sessionStorage.setItem("adultConfirmed","yes");
+
   ageOverlay.classList.add("hidden");
+
 });
 
 document.getElementById("ageNo").addEventListener("click",()=>{
+
   window.location.href="about:blank";
+
 });
 
 /* TRACKING HELPERS */
 
 function getCookie(name){
+
   const match=document.cookie.match(
     new RegExp("(?:^|; )"+name+"=([^;]*)")
   );
+
   return match?decodeURIComponent(match[1]):null;
+
 }
 
 /* EXISTING TELEGRAM TRACKING */
@@ -498,68 +583,99 @@ function getCookie(name){
 async function joinTelegram(){
 
   if(sessionStorage.getItem("adultConfirmed")!=="yes"){
+
     ageOverlay.classList.remove("hidden");
+
     return;
+
   }
 
   button.disabled=true;
   button2.disabled=true;
 
-  statusBox.textContent="Please wait... Creating your private invite link.";
+  statusBox.textContent =
+    "Please wait... Creating your private invite link.";
 
   try{
 
     const params=new URLSearchParams(location.search);
+
     const fbclid=params.get("fbclid");
 
     let fbc=getCookie("_fbc");
 
     if(!fbc && fbclid){
+
       fbc="fb.1."+Date.now()+"."+fbclid;
+
     }
 
     const data={
+
       fbclid:fbclid,
+
       fbc:fbc,
+
       fbp:getCookie("_fbp"),
+
       utm_source:params.get("utm_source"),
+
       utm_medium:params.get("utm_medium"),
+
       utm_campaign:params.get("utm_campaign"),
+
       utm_content:params.get("utm_content"),
+
       utm_term:params.get("utm_term"),
+
       landing_url:location.href,
+
       referrer:document.referrer||null
+
     };
 
     const response=await fetch("/api/create-invite",{
+
       method:"POST",
+
       headers:{"Content-Type":"application/json"},
+
       body:JSON.stringify(data)
+
     });
 
     const result=await response.json();
 
     if(!response.ok || !result.ok || !result.invite_link){
-      throw new Error(result.message||"Invite creation failed");
+
+      throw new Error(
+        result.message||"Invite creation failed"
+      );
+
     }
 
     statusBox.textContent="Opening Telegram...";
+
     location.href=result.invite_link;
 
   }catch(error){
 
     console.error(error);
 
-    statusBox.textContent="Something went wrong. Please try again.";
+    statusBox.textContent =
+      "Something went wrong. Please try again.";
 
     button.disabled=false;
+
     button2.disabled=false;
+
   }
+
 }
 
 button.addEventListener("click",joinTelegram);
-button2.addEventListener("click",joinTelegram);
-</script>
 
-</body>
+button2.addEventListener("click",joinTelegram);
+
+</script></body>
 </html>
