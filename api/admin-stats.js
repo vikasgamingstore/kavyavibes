@@ -5,24 +5,17 @@ import {
 
 function verifySession(req) {
   const secret = process.env.ADMIN_SESSION_SECRET;
-
   if (!secret) return false;
 
   const cookie = req.headers.cookie || "";
 
-  const sessionCookie = cookie
-    .split(";")
-    .map(item => item.trim())
-    .find(item => item.startsWith("admin_session="));
+  const item = cookie.split(";")
+    .map(x => x.trim())
+    .find(x => x.startsWith("admin_session="));
 
-  if (!sessionCookie) return false;
+  if (!item) return false;
 
-  const session = sessionCookie.substring(
-    "admin_session=".length
-  );
-
-  const parts = session.split(".");
-
+  const parts = item.substring("admin_session=".length).split(".");
   if (parts.length !== 2) return false;
 
   const [expires, signature] = parts;
@@ -41,9 +34,16 @@ function verifySession(req) {
   );
 }
 
-async function getCount(table, url, key) {
+async function getCount(table, url, key, filter = null) {
+  const params = new URLSearchParams();
+  params.set("select", "id");
+
+  if (filter) {
+    params.set("status", `eq.${filter}`);
+  }
+
   const response = await fetch(
-    `${url}/rest/v1/${table}?select=id`,
+    `${url}/rest/v1/${table}?${params.toString()}`,
     {
       method: "HEAD",
       headers: {
@@ -59,32 +59,23 @@ async function getCount(table, url, key) {
     throw new Error(`Count failed for ${table}`);
   }
 
-  const contentRange = response.headers.get("content-range");
+  const range = response.headers.get("content-range");
+  if (!range) throw new Error("Count unavailable");
 
-  if (!contentRange) {
-    throw new Error(`Missing count for ${table}`);
-  }
-
-  const total = contentRange.split("/").pop();
-
-  return total === "*"
-    ? 0
-    : Number(total);
+  const total = range.split("/").pop();
+  return total === "*" ? 0 : Number(total);
 }
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
-    return res.status(405).json({
-      ok: false,
-      message: "Method Not Allowed"
-    });
+    return res.status(405).json({ ok: false });
   }
 
   try {
     if (!verifySession(req)) {
       return res.status(401).json({
         ok: false,
-        message: "Unauthorized. Please login."
+        message: "Unauthorized"
       });
     }
 
@@ -101,29 +92,17 @@ export default async function handler(req, res) {
     const [
       visitors,
       invites,
-      joinRequests,
-      eventsSent,
-      eventsFailed,
-      eventsPending
+      requests,
+      sent,
+      failed,
+      pending
     ] = await Promise.all([
       getCount("tracking_visitors", url, key),
       getCount("telegram_invites", url, key),
       getCount("telegram_join_requests", url, key),
-      getCount(
-        "meta_conversion_events?status=eq.sent",
-        url,
-        key
-      ),
-      getCount(
-        "meta_conversion_events?status=eq.failed",
-        url,
-        key
-      ),
-      getCount(
-        "meta_conversion_events?status=eq.pending",
-        url,
-        key
-      )
+      getCount("meta_conversion_events", url, key, "sent"),
+      getCount("meta_conversion_events", url, key, "failed"),
+      getCount("meta_conversion_events", url, key, "pending")
     ]);
 
     return res.status(200).json({
@@ -131,10 +110,10 @@ export default async function handler(req, res) {
       stats: {
         total_visitors: visitors,
         total_invites: invites,
-        total_join_requests: joinRequests,
-        meta_events_sent: eventsSent,
-        meta_events_failed: eventsFailed,
-        meta_events_pending: eventsPending
+        total_join_requests: requests,
+        meta_events_sent: sent,
+        meta_events_failed: failed,
+        meta_events_pending: pending
       }
     });
 
@@ -146,4 +125,4 @@ export default async function handler(req, res) {
       message: "Could not load dashboard statistics"
     });
   }
-}
+        }
