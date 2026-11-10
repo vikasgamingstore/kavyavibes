@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAID FUN - Admin Dashboard</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  background: #080e1b;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  color: #58aaff;
+}
+
+.subtitle {
+  text-align: center;
+  color: #aab8d0;
+  margin-bottom: 30px;
+}
+
+.login-box {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background: #151f32;
+  border-radius: 16px;
+  border: 1px solid #29446b;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 9px;
+  border: 1px solid #40516d;
+  background: #0b1425;
+  color: white;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 18px;
+  border: 0;
+  border-radius: 9px;
+  background: linear-gradient(90deg,#087bff,#704cff);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+.message {
+  text-align: center;
+  margin-top: 15px;
+  color: #ff8585;
+}
+
+.dashboard {
+  display: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.card {
+  background: #151f32;
+  border: 1px solid #29446b;
+  padding: 22px;
+  border-radius: 14px;
+}
+
+.card p {
+  color: #aab8d0;
+  margin: 0;
+}
+
+.card h2 {
+  font-size: 32px;
+  margin: 12px 0 0;
+  color: #58aaff;
+}
+
+.refresh {
+  margin-bottom: 20px;
+}
+
+#lastUpdated {
+  text-align: center;
+  color: #aab8d0;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+@media(max-width:500px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .card h2 {
+    font-size: 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>PAID FUN</h1>
+  <div class="subtitle">Personal Tracking Admin Panel</div>
+
+  <div class="login-box" id="loginBox">
+    <h2>Admin Login</h2>
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Enter Admin Password"
+      autocomplete="current-password"
+    >
+
+    <button id="loginButton" onclick="login()">
+      Login
+    </button>
+
+    <div class="message" id="loginMessage"></div>
+  </div>
+
+  <div class="dashboard" id="dashboard">
+
+    <h2>Tracking Overview</h2>
+
+    <button class="refresh" onclick="loadStats()">
+      Refresh Reports
+    </button>
+
+    <div class="grid">
+
+      <div class="card">
+        <p>Total Visitors</p>
+        <h2 id="visitors">-</h2>
+      </div>
+
+      <div class="card">
+        <p>Total Telegram Invites</p>
+        <h2 id="invites">-</h2>
+      </div>
+
+      <div class="card">
+        <p>Join Requests</p>
+        <h2 id="requests">-</h2>
+      </div>
+
+      <div class="card">
+        <p>Meta Events Sent</p>
+        <h2 id="sent">-</h2>
+      </div>
+
+      <div class="card">
+        <p>Meta Events Failed</p>
+        <h2 id="failed">-</h2>
+      </div>
+
+      <div class="card">
+        <p>Meta Events Pending</p>
+        <h2 id="pending">-</h2>
+      </div>
+
+    </div>
+
+    <div id="lastUpdated"></div>
+    <div class="message" id="dashboardMessage"></div>
+
+  </div>
+
+</div>
+
+<script>
+async function login() {
+  const password = document.getElementById("password").value;
+  const button = document.getElementById("loginButton");
+  const message = document.getElementById("loginMessage");
+
+  if (!password) {
+    message.textContent = "Please enter your password";
+    return;
+  }
+
+  button.disabled = true;
+  message.textContent = "Checking...";
+
+  try {
+    const response = await fetch("/api/admin-login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin",
+      body: JSON.stringify({ password })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "Login failed");
+    }
+
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+
+    await loadStats();
+
+  } catch (error) {
+    message.textContent = error.message;
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function loadStats() {
+  const message = document.getElementById("dashboardMessage");
+  message.textContent = "Loading reports...";
+
+  try {
+    const response = await fetch("/api/admin-stats", {
+      method: "GET",
+      credentials: "same-origin",
+      cache: "no-store"
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.message || "Unable to load reports");
+    }
+
+    const s = result.stats;
+
+    document.getElementById("visitors").textContent =
+      s.total_visitors;
+
+    document.getElementById("invites").textContent =
+      s.total_invites;
+
+    document.getElementById("requests").textContent =
+      s.total_join_requests;
+
+    document.getElementById("sent").textContent =
+      s.meta_events_sent;
+
+    document.getElementById("failed").textContent =
+      s.meta_events_failed;
+
+    document.getElementById("pending").textContent =
+      s.meta_events_pending;
+
+    document.getElementById("lastUpdated").textContent =
+      "Last updated: " + new Date().toLocaleString();
+
+    message.textContent = "";
+
+  } catch (error) {
+    message.textContent = error.message;
+  }
+}
+
+document.getElementById("password").addEventListener(
+  "keydown",
+  function(event) {
+    if (event.key === "Enter") login();
+  }
+);
+</script>
+
+</body>
+</html>
