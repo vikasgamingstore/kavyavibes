@@ -1,5 +1,8 @@
 {
   "name": "telegram-join-request-tracker",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@vercel/speed-insights": "^2.1.0"
+  }
 }
