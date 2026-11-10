@@ -1,134 +1,566 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PAID FUN - Admin Dashboard</title>
+<meta name="theme-color" content="#090611">
+<title>KavyaVibes | Admin Dashboard</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+:root{
+  --bg:#090611;
+  --panel:#151020;
+  --panel2:#1c1429;
+  --border:rgba(205,125,255,.17);
+  --pink:#ff4fa3;
+  --purple:#9b5cff;
+  --text:#fff;
+  --muted:#a99bb8;
+  --green:#42e6a4;
+  --red:#ff6b82;
+}
 
-<style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;padding:20px;min-height:100vh;
-  background:#080e1b;color:white;
-  font-family:Arial,sans-serif
+  margin:0;
+  min-height:100vh;
+  padding:24px;
+  color:var(--text);
+  font-family:'Poppins',sans-serif;
+  background:
+    radial-gradient(ellipse at 10% 0%,rgba(155,92,255,.17),transparent 35%),
+    radial-gradient(ellipse at 95% 20%,rgba(255,79,163,.12),transparent 30%),
+    var(--bg);
 }
-.container{max-width:900px;margin:40px auto}
-h1{text-align:center;color:#58aaff}
-.subtitle{text-align:center;color:#aab8d0;margin-bottom:30px}
-.login-box,.card,.settings-box{
-  background:#151f32;border:1px solid #29446b;
-  border-radius:16px;padding:22px
+
+button,input,textarea{font-family:inherit}
+
+.container{
+  max-width:1100px;
+  margin:0 auto;
 }
-.login-box{max-width:400px;margin:60px auto;padding:30px}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin:5px 0 35px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand-icon{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  box-shadow:0 5px 25px rgba(255,79,163,.25);
+}
+
+.brand h1{
+  margin:0;
+  font-size:23px;
+  font-weight:800;
+  letter-spacing:.3px;
+}
+
+.brand p{
+  margin:2px 0 0;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.admin-badge{
+  padding:8px 14px;
+  border:1px solid var(--border);
+  border-radius:30px;
+  color:#e7b9ff;
+  font-size:11px;
+  font-weight:600;
+  background:rgba(155,92,255,.09);
+}
+
+.login-box{
+  max-width:430px;
+  margin:75px auto;
+  padding:35px;
+  border:1px solid var(--border);
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(35,23,49,.96),rgba(17,13,27,.96));
+  box-shadow:0 20px 70px rgba(0,0,0,.4);
+  animation:fadeUp .7s ease;
+}
+
+.login-icon{
+  width:68px;
+  height:68px;
+  margin:0 auto 18px;
+  display:grid;
+  place-items:center;
+  border-radius:22px;
+  font-size:30px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  box-shadow:0 8px 30px rgba(155,92,255,.3);
+}
+
+.login-box h2{
+  text-align:center;
+  margin:0;
+  font-size:25px;
+}
+
+.login-subtitle{
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  margin:8px 0 25px;
+}
+
+.field-label{
+  display:block;
+  margin:19px 0 8px;
+  font-size:12px;
+  font-weight:600;
+  color:#e4d5f1;
+}
+
 input,textarea{
-  width:100%;padding:14px;margin-top:12px;
-  border-radius:9px;border:1px solid #40516d;
-  background:#0b1425;color:white;font-size:15px
+  width:100%;
+  padding:14px 15px;
+  color:white;
+  background:#0d0916;
+  border:1px solid rgba(190,140,255,.2);
+  border-radius:12px;
+  outline:none;
+  font-size:13px;
+  transition:.25s;
 }
-textarea{min-height:110px;resize:vertical}
-label{display:block;margin-top:18px;color:#cbd8ed;font-weight:bold}
+
+input:focus,textarea:focus{
+  border-color:var(--pink);
+  box-shadow:0 0 0 3px rgba(255,79,163,.09);
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+  line-height:1.7;
+}
+
+input[type="file"]{
+  padding:12px;
+  cursor:pointer;
+}
+
+input[type="file"]::file-selector-button{
+  padding:9px 12px;
+  margin-right:12px;
+  border:0;
+  border-radius:8px;
+  color:white;
+  background:linear-gradient(90deg,var(--purple),var(--pink));
+  cursor:pointer;
+}
+
 button{
-  width:100%;padding:14px;margin-top:16px;
-  border:0;border-radius:9px;
-  background:linear-gradient(90deg,#087bff,#704cff);
-  color:white;font-size:15px;font-weight:bold;cursor:pointer
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-weight:700;
+  transition:transform .2s,box-shadow .2s,opacity .2s;
 }
-button:disabled{opacity:.6;cursor:not-allowed}
-.message{text-align:center;margin-top:15px;color:#ff8585}
-.success{color:#62e6a2}
-.dashboard{display:none}
-.section-title{color:#58aaff;margin:30px 0 15px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-.card p{color:#aab8d0;margin:0}
-.card h2{font-size:30px;margin:12px 0 0;color:#58aaff}
-.settings-box{margin-top:25px}
+
+button:hover:not(:disabled){
+  transform:translateY(-2px);
+  box-shadow:0 8px 25px rgba(255,79,163,.2);
+}
+
+button:active:not(:disabled){transform:scale(.98)}
+
+button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}
+
+.primary-btn{
+  width:100%;
+  padding:14px;
+  margin-top:20px;
+  border-radius:12px;
+  background:linear-gradient(100deg,var(--pink),var(--purple));
+  font-size:14px;
+  box-shadow:0 6px 22px rgba(155,92,255,.2);
+}
+
+.dashboard{display:none;animation:fadeUp .6s ease}
+
+.welcome{
+  padding:27px;
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:linear-gradient(110deg,rgba(255,79,163,.12),rgba(155,92,255,.13));
+  position:relative;
+  overflow:hidden;
+}
+
+.welcome:after{
+  content:"✦";
+  position:absolute;
+  right:35px;
+  top:-25px;
+  font-size:130px;
+  color:rgba(255,255,255,.05);
+}
+
+.welcome h2{
+  margin:0;
+  font-size:24px;
+  font-weight:700;
+}
+
+.welcome p{
+  color:var(--muted);
+  font-size:12px;
+  margin:8px 0 0;
+}
+
+.section-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:32px 0 17px;
+}
+
+.section-heading h2{
+  margin:0;
+  font-size:17px;
+  font-weight:700;
+}
+
+.section-heading span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.refresh-btn{
+  padding:10px 15px;
+  border-radius:10px;
+  font-size:11px;
+  background:linear-gradient(100deg,var(--purple),#704cff);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.stat-card{
+  position:relative;
+  overflow:hidden;
+  padding:20px;
+  min-height:125px;
+  border:1px solid var(--border);
+  border-radius:17px;
+  background:linear-gradient(145deg,#1d1529,#120e1b);
+  transition:.3s;
+  animation:fadeUp .5s ease both;
+}
+
+.stat-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,79,163,.5);
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+.stat-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:500;
+}
+
+.stat-card h3{
+  margin:12px 0 0;
+  font-size:29px;
+  font-weight:800;
+  letter-spacing:.5px;
+  background:linear-gradient(90deg,#fff,var(--pink));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  overflow-wrap:anywhere;
+}
+
+.stat-icon{
+  position:absolute;
+  right:16px;
+  top:15px;
+  font-size:22px;
+  opacity:.8;
+}
+
+.status-line{
+  margin-top:15px;
+  padding:12px 15px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  color:var(--muted);
+  font-size:11px;
+  background:rgba(255,255,255,.025);
+}
+
+.message{
+  min-height:20px;
+  margin-top:13px;
+  color:var(--red);
+  font-size:12px;
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+
+.success{color:var(--green)!important}
+
+.settings-box{
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:linear-gradient(145deg,#191224,#110d19);
+  box-shadow:0 15px 45px rgba(0,0,0,.2);
+}
+
+.settings-intro{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.7;
+  margin:0 0 20px;
+}
+
+.preview-area{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
 .preview{
-  width:150px;height:150px;margin-top:15px;
-  border-radius:14px;object-fit:cover;
-  background:#0b1425;border:2px solid #40516d;
-  display:block
+  width:115px;
+  height:115px;
+  object-fit:cover;
+  display:block;
+  border-radius:20px;
+  background:#0d0916;
+  border:2px solid rgba(255,79,163,.5);
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
 }
-.small-note{color:#9eacc3;font-size:13px;line-height:1.5}
-.refresh{margin-bottom:10px}
-#lastUpdated{text-align:center;color:#aab8d0;font-size:13px;margin-top:20px}
-@media(max-width:500px){
-  .grid{grid-template-columns:1fr 1fr}
-  .card{padding:15px}
-  .card h2{font-size:24px}
-  body{padding:12px}
+
+.preview-info{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.8;
 }
-</style>
-</head>
 
-<body>
-<div class="container">
+.small-note{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.7;
+  margin-top:12px;
+}
 
-<h1>PAID FUN</h1>
-<div class="subtitle">Personal Tracking Admin Panel</div>
+.secondary-btn{
+  width:100%;
+  padding:13px;
+  margin-top:17px;
+  border-radius:11px;
+  background:linear-gradient(100deg,#704cff,#9b5cff);
+  font-size:12px;
+}
 
-<div class="login-box" id="loginBox">
-  <h2>Admin Login</h2>
-  <input type="password" id="password"
-    placeholder="Enter Admin Password"
-    autocomplete="current-password">
-  <button id="loginButton" onclick="login()">Login</button>
-  <div class="message" id="loginMessage"></div>
-</div>
+.save-btn{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border-radius:11px;
+  background:linear-gradient(100deg,var(--pink),#a044ff);
+  font-size:13px;
+}
 
-<div class="dashboard" id="dashboard">
+.footer{
+  text-align:center;
+  color:#71647e;
+  font-size:10px;
+  margin:35px 0 10px;
+}
 
-  <h2 class="section-title">Tracking Overview</h2>
-  <button class="refresh" onclick="loadStats()">Refresh Reports</button>
+.spinner{
+  display:inline-block;
+  width:13px;
+  height:13px;
+  margin-right:7px;
+  vertical-align:middle;
+  border:2px solid rgba(255,255,255,.3);
+  border-top-color:white;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
 
-  <div class="grid">
-    <div class="card"><p>Total Visitors</p><h2 id="visitors">-</h2></div>
-    <div class="card"><p>Total Telegram Invites</p><h2 id="invites">-</h2></div>
-    <div class="card"><p>Join Requests</p><h2 id="requests">-</h2></div>
-    <div class="card"><p>Meta Events Sent</p><h2 id="sent">-</h2></div>
-    <div class="card"><p>Meta Events Failed</p><h2 id="failed">-</h2></div>
-    <div class="card"><p>Meta Events Pending</p><h2 id="pending">-</h2></div>
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:700px){
+  body{padding:15px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .stat-card{padding:15px;min-height:115px}
+  .stat-card h3{font-size:25px}
+  .welcome{padding:22px}
+  .welcome h2{font-size:20px}
+  .settings-box{padding:18px}
+}
+
+@media(max-width:380px){
+  .brand h1{font-size:19px}
+  .admin-badge{font-size:9px;padding:7px 9px}
+  .stat-card h3{font-size:21px}
+  .stat-card p{font-size:10px}
+  .login-box{padding:23px}
+}
+</style></head><body>
+<div class="container"><header class="topbar">
+  <div class="brand">
+    <div class="brand-icon">✦</div>
+    <div>
+      <h1>KavyaVibes</h1>
+      <p>ADMIN CONTROL CENTER</p>
+    </div>
   </div>
+  <div class="admin-badge">● ADMIN PANEL</div>
+</header><!-- LOGIN --><div class="login-box" id="loginBox">
+  <div class="login-icon">🔐</div>
+  <h2>Welcome Back</h2>
+  <p class="login-subtitle">Sign in to manage your website</p><label class="field-label" for="password">Admin Password</label>
+<input
+type="password"
+id="password"
+placeholder="Enter your admin password"
+autocomplete="current-password"
 
-  <div id="lastUpdated"></div>
-  <div class="message" id="dashboardMessage"></div>
+«»
 
-  <h2 class="section-title">Website Customization</h2>
+  <button class="primary-btn" id="loginButton" onclick="login()">
+    Login to Dashboard →
+  </button>  <div class="message" id="loginMessage"></div>
+</div><!-- DASHBOARD --><div class="dashboard" id="dashboard">  <section class="welcome">
+    <h2>Welcome to Dashboard ✨</h2>
+    <p>Manage your website settings and monitor tracking activity.</p>
+  </section>  <div class="section-heading">
+    <h2>📊 Tracking Overview</h2>
+    <button class="refresh-btn" onclick="loadStats()">↻ Refresh Reports</button>
+  </div>  <div class="grid"><div class="stat-card">
+  <span class="stat-icon">👥</span>
+  <p>Total Visitors</p>
+  <h3 id="visitors">-</h3>
+</div>
 
-  <div class="settings-box">
+<div class="stat-card">
+  <span class="stat-icon">🔗</span>
+  <p>Total Telegram Invites</p>
+  <h3 id="invites">-</h3>
+</div>
 
-    <label>Website Name</label>
-    <input id="websiteName" type="text" placeholder="PAID FUN">
+<div class="stat-card">
+  <span class="stat-icon">📩</span>
+  <p>Join Requests</p>
+  <h3 id="requests">-</h3>
+</div>
 
-    <label>Profile Name</label>
-    <input id="profileName" type="text" placeholder="Enter profile name">
+<div class="stat-card">
+  <span class="stat-icon">✅</span>
+  <p>Meta Events Sent</p>
+  <h3 id="sent">-</h3>
+</div>
 
-    <label>Tagline</label>
-    <input id="tagline" type="text" placeholder="Enter tagline">
+<div class="stat-card">
+  <span class="stat-icon">❌</span>
+  <p>Meta Events Failed</p>
+  <h3 id="failed">-</h3>
+</div>
 
-    <label>Profile Description</label>
-    <textarea id="description" placeholder="Enter profile description"></textarea>
+<div class="stat-card">
+  <span class="stat-icon">⏳</span>
+  <p>Meta Events Pending</p>
+  <h3 id="pending">-</h3>
+</div>
 
-    <label>Profile Photo</label>
-    <input id="photoFile" type="file" accept="image/jpeg,image/png,image/webp">
+  </div>  <div class="status-line" id="lastUpdated">
+    Reports have not been loaded yet.
+  </div>  <div class="message" id="dashboardMessage"></div>  <div class="section-heading">
+    <h2>⚙️ Website Customization</h2>
+    <span>Manage your website appearance</span>
+  </div>  <section class="settings-box"><p class="settings-intro">
+  Update your website name, profile details and profile picture.
+  Changes will appear on your website after saving successfully.
+</p>
 
-    <img id="photoPreview" class="preview" alt="Profile preview">
+<label class="field-label" for="websiteName">Website Name</label>
+<input id="websiteName" type="text" placeholder="Enter website name" maxlength="100">
 
-    <p class="small-note">
-      Supported formats: JPG, PNG and WEBP. Maximum recommended size: 5 MB.
-      Select a photo to preview it before uploading.
-    </p>
+<label class="field-label" for="profileName">Profile Name</label>
+<input id="profileName" type="text" placeholder="Enter profile name" maxlength="100">
 
-    <button id="uploadButton" onclick="uploadPhoto()">Upload Profile Photo</button>
+<label class="field-label" for="tagline">Tagline</label>
+<input id="tagline" type="text" placeholder="Enter your tagline" maxlength="200">
 
-    <button id="saveButton" onclick="saveSettings()">Save Website Settings</button>
+<label class="field-label" for="description">Profile Description</label>
+<textarea id="description" placeholder="Write your profile description..." maxlength="2000"></textarea>
 
-    <div class="message" id="settingsMessage"></div>
+<label class="field-label" for="photoFile">Profile Photo</label>
+<input
+  id="photoFile"
+  type="file"
+  accept="image/jpeg,image/png,image/webp"
+>
+
+<div class="preview-area">
+  <img id="photoPreview" class="preview" alt="Profile photo preview">
+  <div class="preview-info">
+    <strong style="color:#f2d8ff">Photo Preview</strong><br>
+    JPG, PNG or WEBP<br>
+    Maximum file size: 5 MB
   </div>
-
-</div>
 </div>
 
-<script>
+<p class="small-note">
+  Select a new photo to preview it. Click Upload Profile Photo to upload it.
+  After uploading, click Save Website Settings to save the updated settings.
+</p>
+
+<button class="secondary-btn" id="uploadButton" onclick="uploadPhoto()">
+  ↑ Upload Profile Photo
+</button>
+
+<button class="save-btn" id="saveButton" onclick="saveSettings()">
+  ✓ Save Website Settings
+</button>
+
+<div class="message" id="settingsMessage"></div>
+
+  </section></div><footer class="footer">
+  KavyaVibes Admin Control Center · Secure Dashboard
+</footer></div><script>
 let selectedPhoto = null;
 
 async function login() {
@@ -137,12 +569,13 @@ async function login() {
   const message = document.getElementById("loginMessage");
 
   if (!password) {
-    message.textContent = "Please enter your password";
+    message.textContent = "Please enter your password.";
     return;
   }
 
   button.disabled = true;
-  message.textContent = "Checking...";
+  button.innerHTML = '<span class="spinner"></span>Checking...';
+  message.textContent = "";
 
   try {
     const response = await fetch("/api/admin-login", {
@@ -168,6 +601,7 @@ async function login() {
     message.textContent = error.message;
   } finally {
     button.disabled = false;
+    button.textContent = "Login to Dashboard →";
   }
 }
 
@@ -197,7 +631,7 @@ async function loadStats() {
     document.getElementById("pending").textContent = s.meta_events_pending;
 
     document.getElementById("lastUpdated").textContent =
-      "Last updated: " + new Date().toLocaleString();
+      "✓ Last updated: " + new Date().toLocaleString();
 
     message.textContent = "";
 
@@ -265,12 +699,15 @@ document.getElementById("photoFile").addEventListener("change", function(event) 
   selectedPhoto = file;
 
   const reader = new FileReader();
+
   reader.onload = function(e) {
     document.getElementById("photoPreview").src = e.target.result;
   };
+
   reader.readAsDataURL(file);
 
   message.textContent = "Photo selected. Click Upload Profile Photo.";
+  message.className = "message";
 });
 
 async function uploadPhoto() {
@@ -283,7 +720,8 @@ async function uploadPhoto() {
   }
 
   button.disabled = true;
-  message.textContent = "Uploading photo...";
+  button.innerHTML = '<span class="spinner"></span>Uploading...';
+  message.textContent = "";
 
   try {
     const base64 = await new Promise((resolve, reject) => {
@@ -313,7 +751,12 @@ async function uploadPhoto() {
     document.getElementById("photoPreview").src =
       result.photo_url + "?t=" + Date.now();
 
-    message.textContent = "Photo uploaded successfully. Now save website settings.";
+    selectedPhoto = null;
+    document.getElementById("photoFile").value = "";
+
+    message.textContent =
+      "Photo uploaded successfully. Now save website settings.";
+
     message.className = "message success";
 
   } catch (error) {
@@ -321,6 +764,7 @@ async function uploadPhoto() {
     message.className = "message";
   } finally {
     button.disabled = false;
+    button.textContent = "↑ Upload Profile Photo";
   }
 }
 
@@ -329,7 +773,7 @@ async function saveSettings() {
   const message = document.getElementById("settingsMessage");
 
   button.disabled = true;
-  message.textContent = "Saving settings...";
+  button.innerHTML = '<span class="spinner"></span>Saving...';
 
   try {
     const settings = {
@@ -352,7 +796,7 @@ async function saveSettings() {
       throw new Error(result.message || "Unable to save settings");
     }
 
-    message.textContent = "Website settings saved successfully!";
+    message.textContent = "✓ Website settings saved successfully!";
     message.className = "message success";
 
   } catch (error) {
@@ -360,13 +804,12 @@ async function saveSettings() {
     message.className = "message";
   } finally {
     button.disabled = false;
+    button.textContent = "✓ Save Website Settings";
   }
 }
 
 document.getElementById("password").addEventListener("keydown", function(event) {
   if (event.key === "Enter") login();
 });
-</script>
-
-</body>
+</script></body>
 </html>
