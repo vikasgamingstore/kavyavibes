@@ -122,6 +122,8 @@ h1 span{
   margin:0 auto 25px;
 }
 
+/* PINK PURPLE TELEGRAM BUTTON */
+
 .join-btn{
   position:relative;
   isolation:isolate;
@@ -130,10 +132,16 @@ h1 span{
   max-width:370px;
   margin:25px auto 0;
   padding:18px;
-  border:2px solid #8eeaff;
+  border:2px solid #ff9bd0;
   border-radius:14px;
-  background:linear-gradient(100deg,#087bff,#0758db,#00bce8);
-  background-size:200% 100%;
+  background:linear-gradient(
+    100deg,
+    #e83c9b,
+    #a72de2,
+    #7824c9,
+    #e83c9b
+  );
+  background-size:250% 100%;
   color:#ffffff !important;
   -webkit-text-fill-color:#ffffff;
   font-family:'Montserrat',sans-serif;
@@ -142,13 +150,15 @@ h1 span{
   letter-spacing:1.2px;
   cursor:pointer;
   text-align:center;
-  text-shadow:0 1px 3px #00336c;
-  box-shadow:0 0 15px #00bfff,0 0 30px #006aff88;
+  text-shadow:0 1px 3px #59104b;
+  box-shadow:0 0 15px #e83c9b88,0 0 30px #a72de266;
   animation:telegramGlow 2s infinite,telegramShine 4s linear infinite;
   transition:transform .2s;
 }
 
-.join-btn:hover{transform:scale(1.025)}
+.join-btn:hover{
+  transform:scale(1.025);
+}
 
 .join-btn:disabled{
   opacity:.6;
@@ -157,13 +167,17 @@ h1 span{
 }
 
 @keyframes telegramGlow{
-  0%,100%{box-shadow:0 0 12px #00bfff,0 0 25px #006aff66}
-  50%{box-shadow:0 0 25px #00e5ff,0 0 45px #006affaa}
+  0%,100%{
+    box-shadow:0 0 12px #e83c9b88,0 0 25px #a72de255;
+  }
+  50%{
+    box-shadow:0 0 25px #ff70bd,0 0 45px #a72de2aa;
+  }
 }
 
 @keyframes telegramShine{
   0%{background-position:0% 50%}
-  100%{background-position:200% 50%}
+  100%{background-position:250% 50%}
 }
 
 #status{
@@ -214,7 +228,10 @@ h1 span{
   box-shadow:0 10px 30px #e64da622;
 }
 
-.icon{font-size:34px;margin-bottom:12px}
+.icon{
+  font-size:34px;
+  margin-bottom:12px;
+}
 
 .card h3{
   font-family:'Playfair Display',serif;
@@ -289,7 +306,10 @@ footer{
   margin-bottom:12px;
 }
 
-.age-box p{color:#d2c4da;font-size:12px}
+.age-box p{
+  color:#d2c4da;
+  font-size:12px;
+}
 
 .age-actions{
   display:flex;
@@ -347,11 +367,7 @@ footer{
 <section class="hero">
 
   <div class="profile-area">
-    <img
-      id="profilePhoto"
-      class="profile-photo"
-      alt="Profile photo"
-    >
+    <img id="profilePhoto" class="profile-photo" alt="Profile photo">
     <div class="profile-name" id="profileName"></div>
   </div>
 
@@ -365,8 +381,6 @@ footer{
     Explore our private adult community featuring chatting,
     video calls, companionship and entertainment services.
   </p>
-
-  <div class="badge">🔒 Private Telegram Community</div>
 
   <button class="join-btn" id="joinButton">
     ✈ JOIN TELEGRAM CHANNEL
@@ -465,7 +479,8 @@ async function loadSiteSettings(){
       document.getElementById("footerName").textContent =
         settings.website_name;
 
-      document.title = settings.website_name + " | 18+ Private Community";
+      document.title =
+        settings.website_name + " | 18+ Private Community";
     }
 
     if(settings.profile_name){
@@ -529,7 +544,7 @@ function getCookie(name){
   return match?decodeURIComponent(match[1]):null;
 }
 
-/* EXISTING TELEGRAM TRACKING - UNCHANGED */
+/* EXISTING TELEGRAM TRACKING */
 
 async function joinTelegram(){
 
