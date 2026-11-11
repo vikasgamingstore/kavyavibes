@@ -17,16 +17,27 @@ export default async function handler(req, res) {
     }
 
     const webhookUrl =
-      "https://telegram-join-request-tracker.vercel.app/api/telegram-webhook";
+      "https://kavyavibes.vercel.app/api/telegram-webhook";
 
-    const telegramUrl =
-      `https://api.telegram.org/bot${token}/setWebhook?url=${encodeURIComponent(webhookUrl)}`;
+    const response = await fetch(
+      `https://api.telegram.org/bot${token}/setWebhook`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          url: webhookUrl,
+          allowed_updates: ["chat_join_request"]
+        })
+      }
+    );
 
-    const response = await fetch(telegramUrl);
     const result = await response.json();
 
     return res.status(200).json({
       ok: result.ok,
+      webhook_url: webhookUrl,
       telegram: result
     });
 
